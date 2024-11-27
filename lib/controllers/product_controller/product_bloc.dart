@@ -1,10 +1,11 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
+
 import 'package:e_com_app/models/product_model.dart';
 import 'package:e_com_app/repository/product_repo.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 
 part 'product_event.dart';
 part 'product_state.dart';
@@ -14,6 +15,8 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   ProductBloc(this.productRepo) : super(ProductInitialState()) {
     // fetching initial products
     on<FetchInitDataEvent>(fetchInitDataEvent);
+
+    // clicking cart button on appbar for navigation to cart page
     on<CartButtonClickEvent>(cartButtonClickEvent);
   }
 
@@ -25,11 +28,10 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       final products = await productRepo.fetchAllProducts();
       emit(ProductLoadedState(products: products.products.toList()));
     } catch (e) {
-      print(e);
       emit(ProductErrorState(msg: e.toString()));
     }
   }
-
+// method for cart button on appbar for navigation to cart page
   FutureOr<void> cartButtonClickEvent(
       CartButtonClickEvent event, Emitter<ProductState> emit) {
     emit(NavigateToCartActionState());

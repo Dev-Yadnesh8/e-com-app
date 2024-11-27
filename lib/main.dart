@@ -1,7 +1,7 @@
 
 import 'package:e_com_app/controllers/product_controller/product_bloc.dart';
 import 'package:e_com_app/repository/product_repo.dart';
-import 'package:e_com_app/views/home_view.dart';
+import 'package:e_com_app/views/products_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
