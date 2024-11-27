@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_com_app/models/product_model.dart';
+import 'package:e_com_app/views/product_detailed_view.dart';
 import 'package:flutter/material.dart';
 
 class ProductCardWidget extends StatelessWidget {
@@ -8,11 +9,17 @@ class ProductCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-              final double discountedPrice = product.price -
-              (product.price * (product.discountPercentage / 100));
+    final double discountedPrice =
+        product.price - (product.price * (product.discountPercentage / 100));
     return InkWell(
       borderRadius: BorderRadius.circular(20),
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>  ProductDetailedView(product: product,),
+            ));
+      },
       child: Ink(
         decoration: BoxDecoration(
           color: Colors.white,
