@@ -15,6 +15,10 @@ final class ProductLoadedState extends ProductState {
   ProductLoadedState({required this.products});
 }
 
-final class ProductErrorState extends ProductState {}
+final class ProductErrorState extends ProductState {
+  final String msg;
+
+  ProductErrorState({required this.msg});
+}
 
 final class NavigateToCartActionState extends ProductActionState {}
