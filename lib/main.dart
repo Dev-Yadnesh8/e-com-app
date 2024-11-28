@@ -1,4 +1,5 @@
 
+import 'package:e_com_app/controllers/cart_controller/cart_bloc.dart';
 import 'package:e_com_app/controllers/product_controller/product_bloc.dart';
 import 'package:e_com_app/repository/product_repo.dart';
 import 'package:e_com_app/views/products_view.dart';
@@ -8,7 +9,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 void main() {
   runApp(
     MultiBlocProvider(providers: [
-      BlocProvider(create: (context) => ProductBloc(ProductRepo()),)
+      BlocProvider(create: (context) => ProductBloc(ProductRepo()),),
+      BlocProvider(create: (context) => CartBloc(),),
     ], child: const MyApp())
     );
 }

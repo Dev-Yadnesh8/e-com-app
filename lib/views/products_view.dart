@@ -1,9 +1,12 @@
+import 'package:e_com_app/controllers/cart_controller/cart_bloc.dart';
 import 'package:e_com_app/controllers/product_controller/product_bloc.dart';
 import 'package:e_com_app/models/product_model.dart';
 import 'package:e_com_app/views/cart_view.dart';
+import 'package:e_com_app/widgets/custom_app_bar.dart';
 import 'package:e_com_app/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:badges/badges.dart' as badges;
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -121,41 +124,58 @@ class _HomeViewState extends State<HomeView>
   }
 
   // AppBar
-  PreferredSizeWidget _myAppBar(BuildContext context) {
-    return AppBar(
-      title: const Text("Ecommerce Catalog App"),
-      bottom: TabBar(
-        tabAlignment: TabAlignment.start,
-        isScrollable: true,
-        controller: _tabController, // link the TabController
-        indicatorColor: Colors.white, // Color for the selected tab indicator
-        indicatorWeight: 4.0, // Thicker indicator line
-        labelColor: Colors.white, // Color of the selected tab label
-        unselectedLabelColor: Colors.white70, // Color for unselected tab labels
-        labelStyle: const TextStyle(
-          fontWeight: FontWeight.bold, // Bold text for selected tab
-          fontSize: 16,
-        ),
-        unselectedLabelStyle: const TextStyle(
-          fontWeight: FontWeight.normal, // Regular text for unselected tabs
-          fontSize: 14,
-        ),
-        tabs: const [
-          Tab(text: "All"),
-          Tab(text: "Beauty"),
-          Tab(text: "Fragrances"),
-          Tab(text: "Furniture"),
-          Tab(text: "Groceries"),
-        ],
+PreferredSizeWidget _myAppBar(BuildContext context) {
+  return CustomAppBar(
+    title: const Text("Ecommerce Catalog App"),
+    bottom: TabBar(
+      tabAlignment: TabAlignment.start,
+      isScrollable: true,
+      controller: _tabController, // Link the TabController
+      indicatorColor: Colors.white, // Color for the selected tab indicator
+      indicatorWeight: 4.0, // Thicker indicator line
+      labelColor: Colors.white, // Color of the selected tab label
+      unselectedLabelColor: Colors.white70, // Color for unselected tab labels
+      labelStyle: const TextStyle(
+        fontWeight: FontWeight.bold, // Bold text for selected tab
+        fontSize: 16,
       ),
-      actions: [
-        IconButton(
-          onPressed: () {
-            context.read<ProductBloc>().add(CartButtonClickEvent());
-          },
-          icon: const Icon(Icons.shopping_cart_outlined),
-        )
+      unselectedLabelStyle: const TextStyle(
+        fontWeight: FontWeight.normal, // Regular text for unselected tabs
+        fontSize: 14,
+      ),
+      tabs: const [
+        Tab(text: "All"),
+        Tab(text: "Beauty"),
+        Tab(text: "Fragrances"),
+        Tab(text: "Furniture"),
+        Tab(text: "Groceries"),
       ],
-    );
-  }
+    ),
+    actions: [
+      InkWell(
+        borderRadius: BorderRadius.circular(50),
+        onTap: () {
+          context.read<ProductBloc>().add(CartButtonClickEvent());
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: BlocBuilder<CartBloc, CartState>(
+            builder: (context, state) {
+              final cartCount =
+                  state is CartLoadedState ? state.cartProducts.length : 0; // Access the cart product count from the state.
+              return badges.Badge(
+                badgeContent: Text(
+                  cartCount.toString(),
+                  style: const TextStyle(color: Colors.white),
+                ),
+                child: const Icon(Icons.shopping_cart_outlined),
+              );
+            },
+          ),
+        ),
+      ),
+    ],
+  );
+}
+
 }

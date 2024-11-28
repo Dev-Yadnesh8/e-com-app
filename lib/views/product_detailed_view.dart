@@ -1,29 +1,24 @@
+import 'package:e_com_app/controllers/cart_controller/cart_bloc.dart';
+import 'package:e_com_app/controllers/product_controller/product_bloc.dart';
 import 'package:e_com_app/models/product_model.dart';
+import 'package:e_com_app/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:badges/badges.dart' as badges;
 
 class ProductDetailedView extends StatelessWidget {
   final Product product;
-  
+
   const ProductDetailedView({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
-    final double discountedPrice = product.price -
-        (product.price * (product.discountPercentage / 100));
+    final double discountedPrice =
+        product.price - (product.price * (product.discountPercentage / 100));
 
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
-        ),
-        title: const Text("Product Details", style: TextStyle(fontSize: 20)),
-        backgroundColor: Colors.deepPurpleAccent,
-        elevation: 0,
-      ),
+      appBar: _myAppBar(context),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
@@ -38,7 +33,8 @@ class ProductDetailedView extends StatelessWidget {
                   height: 350,
                   width: double.infinity,
                   fit: BoxFit.cover,
-                  placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                  placeholder: (context, url) =>
+                      const Center(child: CircularProgressIndicator()),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
@@ -154,7 +150,8 @@ class ProductDetailedView extends StatelessWidget {
               const SizedBox(height: 8),
               _buildSpecificationRow("Brand", product.brand.toString()),
               _buildSpecificationRow("Weight", product.weight.toString()),
-              _buildSpecificationRow("Dimensions", "H:${product.dimensions.height}, W:${product.dimensions.width}"),
+              _buildSpecificationRow("Dimensions",
+                  "H:${product.dimensions.height}, W:${product.dimensions.width}"),
               const SizedBox(height: 16),
 
               // Add to Cart Button (more modern color and rounded edges)
@@ -163,14 +160,15 @@ class ProductDetailedView extends StatelessWidget {
                 height: 60,
                 child: ElevatedButton(
                   onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("Added to Cart")),
-                    );
+                    context
+                        .read<CartBloc>()
+                        .add(AddProductToCart(product: product));
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.deepPurpleAccent,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30), // Rounded corners
+                      borderRadius:
+                          BorderRadius.circular(30), // Rounded corners
                     ),
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
@@ -289,5 +287,37 @@ class ProductDetailedView extends StatelessWidget {
         ),
       );
     }).toList();
+  }
+
+ // app bar 
+  PreferredSizeWidget _myAppBar(BuildContext context) {
+    return CustomAppBar(
+      title: const Text("Product Details"),
+      actions: [
+        InkWell(
+          borderRadius: BorderRadius.circular(50),
+          onTap: () {
+            context.read<ProductBloc>().add(CartButtonClickEvent());
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: BlocBuilder<CartBloc, CartState>(
+              builder: (context, state) {
+                final cartCount = state is CartLoadedState
+                    ? state.cartProducts.length
+                    : 0; // Access the cart product count from the state.
+                return badges.Badge(
+                  badgeContent: Text(
+                    cartCount.toString(),
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                  child: const Icon(Icons.shopping_cart_outlined),
+                );
+              },
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }
