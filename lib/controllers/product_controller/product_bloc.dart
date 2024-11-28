@@ -60,7 +60,6 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         emit(ProductLoadedState(products: _products));
       }
     } catch (e) {
-      print(e);
       emit(ProductErrorState(msg: e.toString()));
     }
   }
