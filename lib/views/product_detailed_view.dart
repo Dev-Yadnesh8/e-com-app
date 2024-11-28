@@ -165,6 +165,7 @@ class ProductDetailedView extends StatelessWidget {
                 ),
               ),
 
+
               const SizedBox(height: 16),
 
               // Add to Cart Button (more modern color and rounded edges)
