@@ -306,6 +306,11 @@ class ProductDetailedView extends StatelessWidget {
   PreferredSizeWidget _myAppBar(BuildContext context) {
     return CustomAppBar(
       title: const Text("Product Details"),
+       leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.adaptive.arrow_back)),
       actions: [
         InkWell(
           borderRadius: BorderRadius.circular(50),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget title;
+  final Widget? leading;
   final PreferredSizeWidget? bottom;
   final List<Widget>? actions;
 
@@ -11,11 +12,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.title,
     this.bottom,
     this.actions,
+    this.leading,
   });
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      leading: leading,
       title: title,
       bottom: bottom,
       actions: actions,
