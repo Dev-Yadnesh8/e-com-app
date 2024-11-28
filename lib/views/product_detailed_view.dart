@@ -152,6 +152,19 @@ class ProductDetailedView extends StatelessWidget {
               _buildSpecificationRow("Weight", product.weight.toString()),
               _buildSpecificationRow("Dimensions",
                   "H:${product.dimensions.height}, W:${product.dimensions.width}"),
+                  const SizedBox(height: 10,),
+              // stock of product
+              Text(
+                product.stock > 10 ? "In Stock" : "Hurry up, only a few left",
+                style: TextStyle(
+                  fontSize: 18, // Adjust font size
+                  fontWeight: FontWeight.bold,
+                  color: product.stock > 10
+                      ? Colors.green
+                      : Colors.red, // Green if in stock, red otherwise
+                ),
+              ),
+
               const SizedBox(height: 16),
 
               // Add to Cart Button (more modern color and rounded edges)
@@ -289,7 +302,7 @@ class ProductDetailedView extends StatelessWidget {
     }).toList();
   }
 
- // app bar 
+  // app bar
   PreferredSizeWidget _myAppBar(BuildContext context) {
     return CustomAppBar(
       title: const Text("Product Details"),
