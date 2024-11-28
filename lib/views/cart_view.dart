@@ -1,7 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_com_app/controllers/cart_controller/cart_bloc.dart';
 import 'package:e_com_app/models/cart_item_model.dart';
-import 'package:e_com_app/models/product_model.dart';
 import 'package:e_com_app/widgets/cart_product_tile.dart';
 import 'package:e_com_app/widgets/custom_app_bar.dart';
 import 'package:e_com_app/widgets/order_total_widget.dart';

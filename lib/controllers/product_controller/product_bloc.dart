@@ -17,8 +17,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     // clicking cart button on appbar for navigation to cart page
     on<CartButtonClickEvent>(cartButtonClickEvent);
 
-    // add to cart button event
-    on<AddToCartEvent>(addToCartEvent);
+  
   }
 
   // method for fetching initial data event
@@ -39,10 +38,5 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     emit(NavigateToCartActionState());
   }
 
-  // method for adding an product to cart
-  FutureOr<void> addToCartEvent(
-      AddToCartEvent event, Emitter<ProductState> emit) {
-    print("Product added to cart");
-    print(event.product.title);
-  }
+  
 }
