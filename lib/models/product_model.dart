@@ -36,7 +36,7 @@ class Product {
     final int id;
     final String title;
     final String description;
-    final Category category;
+    final String category;
     final double price;
     final double discountPercentage;
     final double rating;
@@ -46,8 +46,8 @@ class Product {
     final String sku;
     final int weight;
     final Dimensions dimensions;
-    final String warrantyInformation;
-    final String shippingInformation;
+    final WarrantyInformation warrantyInformation;
+    final ShippingInformation shippingInformation;
     final AvailabilityStatus availabilityStatus;
     final List<Review> reviews;
     final ReturnPolicy returnPolicy;
@@ -89,7 +89,7 @@ class Product {
         id: json["id"],
         title: json["title"],
         description: json["description"],
-        category: categoryValues.map[json["category"]]!,
+        category: json["category"],
         price: json["price"]?.toDouble(),
         discountPercentage: json["discountPercentage"]?.toDouble(),
         rating: json["rating"]?.toDouble(),
@@ -99,8 +99,8 @@ class Product {
         sku: json["sku"],
         weight: json["weight"],
         dimensions: Dimensions.fromJson(json["dimensions"]),
-        warrantyInformation: json["warrantyInformation"],
-        shippingInformation: json["shippingInformation"],
+        warrantyInformation: warrantyInformationValues.map[json["warrantyInformation"]]!,
+        shippingInformation: shippingInformationValues.map[json["shippingInformation"]]!,
         availabilityStatus: availabilityStatusValues.map[json["availabilityStatus"]]!,
         reviews: List<Review>.from(json["reviews"].map((x) => Review.fromJson(x))),
         returnPolicy: returnPolicyValues.map[json["returnPolicy"]]!,
@@ -114,7 +114,7 @@ class Product {
         "id": id,
         "title": title,
         "description": description,
-        "category": categoryValues.reverse[category],
+        "category": category,
         "price": price,
         "discountPercentage": discountPercentage,
         "rating": rating,
@@ -124,8 +124,8 @@ class Product {
         "sku": sku,
         "weight": weight,
         "dimensions": dimensions.toJson(),
-        "warrantyInformation": warrantyInformation,
-        "shippingInformation": shippingInformation,
+        "warrantyInformation": warrantyInformationValues.reverse[warrantyInformation],
+        "shippingInformation": shippingInformationValues.reverse[shippingInformation],
         "availabilityStatus": availabilityStatusValues.reverse[availabilityStatus],
         "reviews": List<dynamic>.from(reviews.map((x) => x.toJson())),
         "returnPolicy": returnPolicyValues.reverse[returnPolicy],
@@ -138,26 +138,14 @@ class Product {
 
 enum AvailabilityStatus {
     IN_STOCK,
-    LOW_STOCK
+    LOW_STOCK,
+    OUT_OF_STOCK
 }
 
 final availabilityStatusValues = EnumValues({
     "In Stock": AvailabilityStatus.IN_STOCK,
-    "Low Stock": AvailabilityStatus.LOW_STOCK
-});
-
-enum Category {
-    BEAUTY,
-    FRAGRANCES,
-    FURNITURE,
-    GROCERIES
-}
-
-final categoryValues = EnumValues({
-    "beauty": Category.BEAUTY,
-    "fragrances": Category.FRAGRANCES,
-    "furniture": Category.FURNITURE,
-    "groceries": Category.GROCERIES
+    "Low Stock": AvailabilityStatus.LOW_STOCK,
+    "Out of Stock": AvailabilityStatus.OUT_OF_STOCK
 });
 
 class Dimensions {
@@ -238,7 +226,7 @@ final returnPolicyValues = EnumValues({
 
 class Review {
     final int rating;
-    final String comment;
+    final Comment comment;
     final DateTime date;
     final String reviewerName;
     final String reviewerEmail;
@@ -257,7 +245,7 @@ class Review {
 
     factory Review.fromJson(Map<String, dynamic> json) => Review(
         rating: json["rating"],
-        comment: json["comment"],
+        comment: commentValues.map[json["comment"]]!,
         date: DateTime.parse(json["date"]),
         reviewerName: json["reviewerName"],
         reviewerEmail: json["reviewerEmail"],
@@ -265,12 +253,104 @@ class Review {
 
     Map<String, dynamic> toJson() => {
         "rating": rating,
-        "comment": comment,
+        "comment": commentValues.reverse[comment],
         "date": date.toIso8601String(),
         "reviewerName": reviewerName,
         "reviewerEmail": reviewerEmail,
     };
 }
+
+enum Comment {
+    AWESOME_PRODUCT,
+    DISAPPOINTING_PRODUCT,
+    EXCELLENT_QUALITY,
+    FAST_SHIPPING,
+    GREAT_PRODUCT,
+    GREAT_VALUE_FOR_MONEY,
+    HIGHLY_IMPRESSED,
+    HIGHLY_RECOMMENDED,
+    NOT_AS_DESCRIBED,
+    NOT_WORTH_THE_PRICE,
+    POOR_QUALITY,
+    VERY_DISAPPOINTED,
+    VERY_DISSATISFIED,
+    VERY_HAPPY_WITH_MY_PURCHASE,
+    VERY_PLEASED,
+    VERY_SATISFIED,
+    VERY_UNHAPPY_WITH_MY_PURCHASE,
+    WASTE_OF_MONEY,
+    WOULD_BUY_AGAIN,
+    WOULD_NOT_BUY_AGAIN,
+    WOULD_NOT_RECOMMEND
+}
+
+final commentValues = EnumValues({
+    "Awesome product!": Comment.AWESOME_PRODUCT,
+    "Disappointing product!": Comment.DISAPPOINTING_PRODUCT,
+    "Excellent quality!": Comment.EXCELLENT_QUALITY,
+    "Fast shipping!": Comment.FAST_SHIPPING,
+    "Great product!": Comment.GREAT_PRODUCT,
+    "Great value for money!": Comment.GREAT_VALUE_FOR_MONEY,
+    "Highly impressed!": Comment.HIGHLY_IMPRESSED,
+    "Highly recommended!": Comment.HIGHLY_RECOMMENDED,
+    "Not as described!": Comment.NOT_AS_DESCRIBED,
+    "Not worth the price!": Comment.NOT_WORTH_THE_PRICE,
+    "Poor quality!": Comment.POOR_QUALITY,
+    "Very disappointed!": Comment.VERY_DISAPPOINTED,
+    "Very dissatisfied!": Comment.VERY_DISSATISFIED,
+    "Very happy with my purchase!": Comment.VERY_HAPPY_WITH_MY_PURCHASE,
+    "Very pleased!": Comment.VERY_PLEASED,
+    "Very satisfied!": Comment.VERY_SATISFIED,
+    "Very unhappy with my purchase!": Comment.VERY_UNHAPPY_WITH_MY_PURCHASE,
+    "Waste of money!": Comment.WASTE_OF_MONEY,
+    "Would buy again!": Comment.WOULD_BUY_AGAIN,
+    "Would not buy again!": Comment.WOULD_NOT_BUY_AGAIN,
+    "Would not recommend!": Comment.WOULD_NOT_RECOMMEND
+});
+
+enum ShippingInformation {
+    SHIPS_IN_12_BUSINESS_DAYS,
+    SHIPS_IN_1_MONTH,
+    SHIPS_IN_1_WEEK,
+    SHIPS_IN_2_WEEKS,
+    SHIPS_IN_35_BUSINESS_DAYS,
+    SHIPS_OVERNIGHT
+}
+
+final shippingInformationValues = EnumValues({
+    "Ships in 1-2 business days": ShippingInformation.SHIPS_IN_12_BUSINESS_DAYS,
+    "Ships in 1 month": ShippingInformation.SHIPS_IN_1_MONTH,
+    "Ships in 1 week": ShippingInformation.SHIPS_IN_1_WEEK,
+    "Ships in 2 weeks": ShippingInformation.SHIPS_IN_2_WEEKS,
+    "Ships in 3-5 business days": ShippingInformation.SHIPS_IN_35_BUSINESS_DAYS,
+    "Ships overnight": ShippingInformation.SHIPS_OVERNIGHT
+});
+
+enum WarrantyInformation {
+    LIFETIME_WARRANTY,
+    NO_WARRANTY,
+    THE_1_MONTH_WARRANTY,
+    THE_1_WEEK_WARRANTY,
+    THE_1_YEAR_WARRANTY,
+    THE_2_YEAR_WARRANTY,
+    THE_3_MONTHS_WARRANTY,
+    THE_3_YEAR_WARRANTY,
+    THE_5_YEAR_WARRANTY,
+    THE_6_MONTHS_WARRANTY
+}
+
+final warrantyInformationValues = EnumValues({
+    "Lifetime warranty": WarrantyInformation.LIFETIME_WARRANTY,
+    "No warranty": WarrantyInformation.NO_WARRANTY,
+    "1 month warranty": WarrantyInformation.THE_1_MONTH_WARRANTY,
+    "1 week warranty": WarrantyInformation.THE_1_WEEK_WARRANTY,
+    "1 year warranty": WarrantyInformation.THE_1_YEAR_WARRANTY,
+    "2 year warranty": WarrantyInformation.THE_2_YEAR_WARRANTY,
+    "3 months warranty": WarrantyInformation.THE_3_MONTHS_WARRANTY,
+    "3 year warranty": WarrantyInformation.THE_3_YEAR_WARRANTY,
+    "5 year warranty": WarrantyInformation.THE_5_YEAR_WARRANTY,
+    "6 months warranty": WarrantyInformation.THE_6_MONTHS_WARRANTY
+});
 
 class EnumValues<T> {
     Map<String, T> map;

@@ -287,7 +287,7 @@ class ProductDetailedView extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  review.comment,
+                  review.comment.toString(),
                   style: const TextStyle(fontSize: 14, color: Colors.black54),
                 ),
                 const SizedBox(height: 8),

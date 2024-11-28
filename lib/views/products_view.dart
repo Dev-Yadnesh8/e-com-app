@@ -18,14 +18,34 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView>
     with SingleTickerProviderStateMixin {
   late final TabController _tabController;
+  final ScrollController _scrollController = ScrollController();
+  
+
 
   @override
   void initState() {
     _tabController =
-        TabController(length: 5, vsync: this); // 1 for All + 4 categories
+        TabController(length: 6, vsync: this); // 1 for All + 4 categories
     context.read<ProductBloc>().add(FetchInitDataEvent());
+    _scrollController.addListener(_scrollListener); // Add listener to the scroll controller
+
     super.initState();
   }
+
+    // Detect when the user has scrolled to the bottom
+  void _scrollListener() {
+    if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
+      context.read<ProductBloc>().add(FetchMoreDataEvent());
+    }
+  }
+
+
+  @override
+  void dispose() {
+    _scrollController.dispose(); // Dispose of the scroll controller
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -87,16 +107,19 @@ class _HomeViewState extends State<HomeView>
           _buildProductGridView(state.products),
           // Category-specific views
           _buildProductGridView(state.products
-              .where((product) => product.category == Category.BEAUTY)
+              .where((product) => product.category == 'beauty')
               .toList()),
           _buildProductGridView(state.products
-              .where((product) => product.category == Category.FRAGRANCES)
+              .where((product) => product.category == 'fragrances')
               .toList()),
           _buildProductGridView(state.products
-              .where((product) => product.category == Category.FURNITURE)
+              .where((product) => product.category == 'furniture')
               .toList()),
           _buildProductGridView(state.products
-              .where((product) => product.category == Category.GROCERIES)
+              .where((product) => product.category == 'groceries')
+              .toList()),
+              _buildProductGridView(state.products
+              .where((product) => product.category == 'laptops')
               .toList()),
         ],
       ),
@@ -105,9 +128,10 @@ class _HomeViewState extends State<HomeView>
 
   // Method to build the product grid view
   Widget _buildProductGridView(List<Product> products) {
-    return Padding(
+    return products.isEmpty ? const Center(child: Text("No Data!!"),) :  Padding(
       padding: const EdgeInsets.all(8.0),
       child: GridView.builder(
+        controller: _scrollController,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           crossAxisSpacing: 8.0,
@@ -149,6 +173,7 @@ PreferredSizeWidget _myAppBar(BuildContext context) {
         Tab(text: "Fragrances"),
         Tab(text: "Furniture"),
         Tab(text: "Groceries"),
+        Tab(text: "Laptops"),
       ],
     ),
     actions: [
