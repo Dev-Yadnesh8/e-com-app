@@ -37,8 +37,8 @@ The app leverages modern development techniques, including **Bloc for state mana
 <img src="https://github.com/user-attachments/assets/cbfcd1c4-6e16-4158-8877-c5ec000a6b10" alt="Home Screen4" width="400"/>
 
 ### Product Details
-<img src="https://github.com/user-attachments/assets/20bb7a69-e08f-4885-9980-7b81244d540c" alt="Product Detail 1" width="400"/>
-<img src="https://github.com/user-attachments/assets/7ffd55d1-e9c8-4d70-901c-97b60b7ae6cc" alt="Product Detail 2" width="400"/>
+<img src="https://github.com/user-attachments/assets/7ffd55d1-e9c8-4d70-901c-97b60b7ae6cc" alt="Product Detail 1" width="400"/>
+<img src="https://github.com/user-attachments/assets/20bb7a69-e08f-4885-9980-7b81244d540c" alt="Product Detail 2" width="400"/>
 
 ### Cart Management
 <img src="https://github.com/user-attachments/assets/00990de9-cd8e-4a14-80e1-8fe2d735777e" alt="Cart Management" width="400"/>
