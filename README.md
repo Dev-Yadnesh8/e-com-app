@@ -46,6 +46,5 @@ The app leverages modern development techniques, including **Bloc for state mana
 
 👉 Download the APK and experience the app yourself!
 
-[**Download E-Com App APK**](#)
+[**Download E-Com App APK**](https://github.com/user-attachments/files/17954452/app-arm64-v8a-release.apk.zip)
 
-*(Replace the `#` with your APK link.)*
