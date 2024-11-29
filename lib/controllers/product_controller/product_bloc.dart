@@ -39,7 +39,6 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       _skip += _limit; // Update skip value for next request
       emit(ProductLoadedState(products: _products));
     } catch (e) {
-      print(e);
       emit(ProductErrorState(msg: e.toString()));
     }
   }
