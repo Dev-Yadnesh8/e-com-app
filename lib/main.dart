@@ -22,7 +22,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return   MaterialApp(
-      title: 'Ecommerce',
+      debugShowCheckedModeBanner: false,
+      title: 'Ecommerce-App',
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.grey[200],
         appBarTheme: const AppBarTheme(
