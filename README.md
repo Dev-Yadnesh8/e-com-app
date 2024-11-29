@@ -31,14 +31,17 @@ The app leverages modern development techniques, including **Bloc for state mana
 ## Screenshots
 
 ### Home Screen
-<img src="https://github.com/user-attachments/assets/75b9a96e-4d49-4bfe-928d-3434ec15f6e6" alt="Home Screen" width="400"/>
+<img src="https://github.com/user-attachments/assets/d13f7752-e6c1-4938-9a98-f811d5f9374c" alt="Home Screen" width="400"/>
+<img src="https://github.com/user-attachments/assets/a518fa04-1b2e-44a8-a315-845cf0f1a279" alt="Home Screen2" width="400"/>
+<img src="https://github.com/user-attachments/assets/d2951c80-23b5-4666-8870-fb55f3e83b0b" alt="Home Screen3" width="400"/>
+<img src="https://github.com/user-attachments/assets/cbfcd1c4-6e16-4158-8877-c5ec000a6b10" alt="Home Screen4" width="400"/>
 
 ### Product Details
-<img src="https://github.com/user-attachments/assets/f047872b-0759-4937-a933-209e9c3072a3" alt="Product Detail 1" width="400"/>
-<img src="https://github.com/user-attachments/assets/6c655049-7d07-4958-b5ee-2fc7d64d5115" alt="Product Detail 2" width="400"/>
+<img src="https://github.com/user-attachments/assets/7ffd55d1-e9c8-4d70-901c-97b60b7ae6cc" alt="Product Detail 1" width="400"/>
+<img src="https://github.com/user-attachments/assets/20bb7a69-e08f-4885-9980-7b81244d540c" alt="Product Detail 2" width="400"/>
 
 ### Cart Management
-<img src="https://github.com/user-attachments/assets/8ea4f948-ceb3-4ef9-b9d4-3c77dc11be79" alt="Cart Management" width="400"/>
+<img src="https://github.com/user-attachments/assets/00990de9-cd8e-4a14-80e1-8fe2d735777e" alt="Cart Management" width="400"/>
 
 ---
 
