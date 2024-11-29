@@ -1,16 +1,27 @@
-# e_com_app
+# E-Com App
 
-A new Flutter project.
+**E-Com App** is a simple and dynamic Flutter-based e-commerce application. It allows users to browse through products, filter them by categories, add items to the cart, and manage their shopping experience seamlessly.
 
-## Getting Started
+This project uses modern Flutter techniques, including **Bloc** for state management, **pagination** for efficient product loading, and a clean **UI** for a great user experience.
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+## Features
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- **Product Browsing**:  
+  View products with images, prices, and descriptions.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- **Category Filtering**:  
+  Easily switch between categories to find what you're looking for.
+
+- **Add to Cart**:  
+  Add products to your cart, adjust quantities, and remove items.
+
+- **Cart Management**:  
+  See your cart’s total value and number of items.
+
+- **Pagination**:  
+  Loads products in batches for better performance.
+
+- **Dynamic Navigation**:  
+  Navigate between the product catalog and cart.
