@@ -9,6 +9,7 @@ class ProductCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     final double discountedPrice =
         product.price - (product.price * (product.discountPercentage / 100));
     return InkWell(
@@ -17,7 +18,9 @@ class ProductCardWidget extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) =>  ProductDetailedView(product: product,),
+              builder: (context) => ProductDetailedView(
+                product: product,
+              ),
             ));
       },
       child: Ink(

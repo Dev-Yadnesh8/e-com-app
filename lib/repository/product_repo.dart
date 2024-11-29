@@ -3,7 +3,7 @@ import 'package:e_com_app/models/product_model.dart';
 
 class ProductRepo {
   final Dio _dio = Dio();
-  static const _url = 'https://dummyjson.com/products';
+  static const _url = 'http://dummyjson.com/products';
 
   Future<List<Product>> fetchAllProductsWithPagingnation(
       int skip, int limit) async {
